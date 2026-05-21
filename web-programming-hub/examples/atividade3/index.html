@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 3 - DevTech Store</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome para ícones premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Barra Superior -->
+    <header class="nav-bar">
+        <div class="nav-brand"><i class="fa-solid fa-laptop-code"></i> DevStore</div>
+        
+        <!-- Caixa de Busca Integrada -->
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Pesquisar periféricos...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <!-- Botão Disparador do Carrinho -->
+        <button class="cart-trigger" id="cart-btn" aria-label="Abrir Carrinho">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span id="cart-counter" class="cart-counter">0</span>
+        </button>
+    </header>
+
+    <!-- Layout Principal: Grid de Catálogo + Painel de Carrinho Lateral -->
+    <div class="main-layout">
+        
+        <!-- Seção do Catálogo -->
+        <section class="catalog">
+            <h2 class="section-title">Nossos Equipamentos</h2>
+            <div class="product-grid" id="product-grid">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </section>
+
+        <!-- Painel Lateral de Resumo de Compras -->
+        <aside class="cart-panel" id="cart-panel">
+            <h2 class="cart-title">
+                <i class="fa-solid fa-bag-shopping"></i> Resumo do Carrinho
+            </h2>
+            
+            <!-- Lista Dinâmica de Itens Inseridos -->
+            <div class="cart-items" id="cart-items">
+                <!-- Itens serão adicionados aqui -->
+            </div>
+
+            <!-- Somatório e Finalização -->
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Itens Totais:</span>
+                    <span id="summary-qty">0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Valor Total:</span>
+                    <span id="summary-total">R$ 0,00</span>
+                </div>
+                <button class="btn-checkout" id="checkout-btn" disabled>Finalizar Aquisição</button>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Script de Aplicação -->
+    <script src="app.js"></script>
+</body>
+</html>

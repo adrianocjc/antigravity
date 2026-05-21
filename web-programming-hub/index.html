@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Dev Hub & Playground - Atividades Práticas</title>
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome para ícones premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ==========================================================================
+         HEADER
+         ========================================================================== -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fa-solid fa-cubes"></i>
+                Web Dev <span>Hub & Playground</span>
+            </div>
+            <div class="header-meta">
+                <i class="fa-solid fa-graduation-cap"></i> Área do Professor & Aluno
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         MAIN LAYOUT
+         ========================================================================== -->
+    <main>
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <!-- Navegação -->
+            <nav class="nav-card">
+                <div class="nav-card-title">
+                    <i class="fa-solid fa-compass"></i> Navegação
+                </div>
+                <ul class="nav-links">
+                    <li class="nav-item active" data-tab="dashboard">
+                        <button><span class="label"><i class="fa-solid fa-house"></i> Início</span></button>
+                    </li>
+                    <li class="nav-item" data-tab="atividade1">
+                        <button>
+                            <span class="label"><i class="fa-solid fa-address-card"></i> 1. Card de Perfil</span>
+                            <span class="badge badge-easy">Fácil</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" data-tab="atividade2">
+                        <button>
+                            <span class="label"><i class="fa-solid fa-list-check"></i> 2. To-Do List</span>
+                            <span class="badge badge-medium">Médio</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" data-tab="atividade3">
+                        <button>
+                            <span class="label"><i class="fa-solid fa-cart-shopping"></i> 3. Vitrine Virtual</span>
+                            <span class="badge badge-hard">Difícil</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" data-tab="atividade4">
+                        <button>
+                            <span class="label"><i class="fa-solid fa-database"></i> 4. Banco de Dados</span>
+                            <span class="badge badge-fullstack">Fullstack</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" data-tab="sandbox">
+                        <button><span class="label" style="color: var(--secondary);"><i class="fa-solid fa-code"></i> Live Sandbox</span></button>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Card Informativo -->
+            <div class="info-box">
+                <h3><i class="fa-solid fa-lightbulb" style="color: #facc15;"></i> Dica Pedagógica</h3>
+                <p>Estas atividades foram desenvolvidas de forma progressiva. Incentive seus alunos a criarem primeiro a estrutura HTML, depois estilizarem com CSS e finalmente darem vida ao projeto usando JavaScript.</p>
+                <div style="border-top: 1px solid var(--border-color); padding-top: 0.75rem; margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                    <i class="fa-solid fa-circle-info"></i> Todos os códigos incluem comentários didáticos detalhados.
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTENT AREA -->
+        <section class="content-area">
+
+            <!-- ==========================================================================
+                 TAB: DASHBOARD (HOME)
+                 ========================================================================== -->
+            <div id="dashboard" class="tab-content active">
+                <div class="hero-panel">
+                    <h1>Acelere o aprendizado de Programação Web de seus alunos</h1>
+                    <p>Bem-vindo ao <strong>Web Dev Hub & Playground</strong>. Um ecossistema completo para demonstrar na prática o uso moderno de HTML5, CSS3, JavaScript ES6+ e a arquitetura cliente-servidor com PHP & MySQL. Disponibilize projetos prontos, guias estruturados e experimentação instantânea.</p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Atividades Práticas</span>
+                        </div>
+                        <div class="stat-item" style="border-color: rgba(6, 182, 212, 0.2)">
+                            <span class="stat-value" style="color: var(--secondary)">4 +</span>
+                            <span class="stat-label">Tecnologias</span>
+                        </div>
+                        <div class="stat-item" style="border-color: rgba(139, 92, 246, 0.2)">
+                            <span class="stat-value" style="color: var(--primary)">Sim</span>
+                            <span class="stat-label">Live Playground</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="activity-card" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-chalkboard-user" style="color: var(--secondary);"></i> Como usar este Hub?
+                        </h3>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;">
+                            Como professor, você pode projetar este painel em sala de aula para exemplificar conceitos de interface. Cada atividade listada na barra lateral vem com instruções precisas, objetivos educacionais claros e o código completo estruturado em abas. Além disso, você pode carregar qualquer modelo diretamente no <strong>Live Sandbox</strong> para fazer alterações ao vivo e ver o resultado imediato com seus alunos.
+                        </p>
+                    </div>
+                    <div class="activity-card" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-server" style="color: var(--primary);"></i> Conexão com Banco de Dados
+                        </h3>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;">
+                            Na **Atividade 4**, detalhamos um exemplo prático de formulário conectado a banco de dados relacional usando **PHP** e **MySQL**. Fornecemos um script de banco de dados (`schema.sql`) e scripts PHP organizados, prontos para rodar em ambientes locais como XAMPP, Laragon ou Docker.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+                 TAB: ATIVIDADE 1 (CARD DE PERFIL)
+                 ========================================================================== -->
+            <div id="atividade1" class="tab-content">
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div>
+                            <span class="badge badge-easy" style="margin-bottom: 0.5rem; display: inline-block;">Nível: Iniciante</span>
+                            <h2 class="activity-title">Atividade 1: Card de Perfil Dinâmico</h2>
+                        </div>
+                        <button class="btn-sandbox" onclick="loadActivityToSandbox('atividade1')">
+                            <i class="fa-solid fa-play"></i> Testar no Sandbox
+                        </button>
+                    </div>
+                    <p class="activity-desc">Criação de um componente visual clássico de card de perfil de usuário. Ideal para ensinar manipulação de layouts modernos, tipografia, bordas arredondadas e transições CSS de alta performance.</p>
+                    
+                    <div class="details-grid">
+                        <div class="objectives-box">
+                            <span class="box-title"><i class="fa-solid fa-bullseye" style="color: var(--secondary);"></i> Objetivos Educacionais</span>
+                            <ul>
+                                <li>Dominar o uso de tags semânticas do HTML5 (`<article>`, `<header>`, `<footer>`).</li>
+                                <li>Compreender o alinhamento flexível e responsivo com **CSS Flexbox**.</li>
+                                <li>Implementar variáveis CSS para gerenciar cores de maneira escalável.</li>
+                                <li>Criar interações dinâmicas e transições fluidas com pseudo-classes (`:hover`, `:focus`).</li>
+                            </ul>
+                        </div>
+                        <div class="instructions-box">
+                            <span class="box-title"><i class="fa-solid fa-list-ol" style="color: var(--primary);"></i> Instruções Passo a Passo</span>
+                            <ol>
+                                <li>Crie a estrutura básica HTML contendo a foto do perfil, nome, profissão, links sociais e biografia.</li>
+                                <li>Aplique reset de CSS padrão para garantir consistência entre navegadores.</li>
+                                <li>Centralize o card na tela usando Flexbox no elemento pai.</li>
+                                <li>Estilize o card com fundo translúcido, cantos arredondados, sombras sutis e transição hover que aumenta o card ligeiramente (`transform: translateY(-5px)`).</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Visualizador de Código -->
+                    <div class="code-viewer-container">
+                        <div class="code-tabs">
+                            <button class="code-tab-btn active" data-file="html" onclick="switchCodeTab(this, 'html')">
+                                <i class="fa-brands fa-html5" style="color: #e34c26;"></i> index.html
+                            </button>
+                            <button class="code-tab-btn" data-file="css" onclick="switchCodeTab(this, 'css')">
+                                <i class="fa-brands fa-css3-alt" style="color: #264de4;"></i> style.css
+                            </button>
+                        </div>
+                        <div class="code-content-wrapper">
+                            <button class="btn-copy" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar Código</button>
+                            <!-- HTML CODE BLOCK -->
+                            <pre class="code-block code-html active"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Card de Perfil Profissional&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+    &lt;!-- Importando ícones do FontAwesome --&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- Elemento principal do Card --&gt;
+    &lt;article class="profile-card"&gt;
+        
+        &lt;!-- Cabeçalho com foto de perfil e cobertura --&gt;
+        &lt;header class="card-header"&gt;
+            &lt;div class="avatar-container"&gt;
+                &lt;img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop" alt="Foto de Mariana Cook" class="avatar"&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+
+        &lt;!-- Conteúdo do Card --&gt;
+        &lt;section class="card-body"&gt;
+            &lt;h1 class="name"&gt;Ana Silva&lt;/h1&gt;
+            &lt;p class="title"&gt;Desenvolvedora Front-End Senior&lt;/p&gt;
+            &lt;p class="bio"&gt;Apaixonada por CSS moderno, animações fluidas e arquitetura de interfaces focada na usabilidade e acessibilidade.&lt;/p&gt;
+        &lt;/section&gt;
+
+        &lt;!-- Rodapé com Redes Sociais --&gt;
+        &lt;footer class="card-footer"&gt;
+            &lt;a href="#" class="social-btn github" aria-label="Github"&gt;
+                &lt;i class="fa-brands fa-github"&gt;&lt;/i&gt;
+            &lt;/a&gt;
+            &lt;a href="#" class="social-btn linkedin" aria-label="LinkedIn"&gt;
+                &lt;i class="fa-brands fa-linkedin-in"&gt;&lt;/i&gt;
+            &lt;/a&gt;
+            &lt;a href="#" class="social-btn twitter" aria-label="Twitter"&gt;
+                &lt;i class="fa-brands fa-twitter"&gt;&lt;/i&gt;
+            &lt;/a&gt;
+        &lt;/footer&gt;
+
+    &lt;/article&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            <!-- CSS CODE BLOCK -->
+                            <pre class="code-block code-css"><code>/* ==========================================
+   VARIÁVEIS CSS (DESIGN TOKENS)
+   ========================================== */
+:root {
+    --primary: #6366f1;         /* Violeta */
+    --primary-hover: #4f46e5;
+    --text-main: #1e293b;       /* Slate 800 */
+    --text-muted: #64748b;      /* Slate 500 */
+    --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================
+   RESET PADRÃO
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+/* ==========================================
+   ESTILOS DO CARD
+   ========================================== */
+.profile-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+/* Efeito Hover no Card */
+.profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Banner de Fundo */
+.card-header {
+    background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+    height: 120px;
+    position: relative;
+    margin-bottom: 60px; /* Dá espaço para a imagem flutuante */
+}
+
+/* Foto do Avatar */
+.avatar-container {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Informações do Corpo */
+.card-body {
+    padding: 0 2rem 1.5rem 2rem;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.35rem;
+}
+
+.title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.bio {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Redes Sociais do Rodapé */
+.card-footer {
+    background: #f8fafc;
+    padding: 1.25rem 2rem;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+.social-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+/* Efeito Hover nos botões de Redes Sociais */
+.social-btn:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.social-btn.github:hover { background: #1f2328; border-color: #1f2328; }
+.social-btn.linkedin:hover { background: #0a66c2; border-color: #0a66c2; }
+.social-btn.twitter:hover { background: #1d9bf0; border-color: #1d9bf0; }</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+                 TAB: ATIVIDADE 2 (TO-DO LIST)
+                 ========================================================================== -->
+            <div id="atividade2" class="tab-content">
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div>
+                            <span class="badge badge-medium" style="margin-bottom: 0.5rem; display: inline-block;">Nível: Intermediário</span>
+                            <h2 class="activity-title">Atividade 2: Gerenciador de Tarefas Interativo</h2>
+                        </div>
+                        <button class="btn-sandbox" onclick="loadActivityToSandbox('atividade2')">
+                            <i class="fa-solid fa-play"></i> Testar no Sandbox
+                        </button>
+                    </div>
+                    <p class="activity-desc">Desenvolvimento de uma lista de tarefas interativa. Ensina a manipular o DOM a partir de interações do usuário, lidar com arrays de objetos em JS e persistir dados localmente de forma simples.</p>
+                    
+                    <div class="details-grid">
+                        <div class="objectives-box">
+                            <span class="box-title"><i class="fa-solid fa-bullseye" style="color: var(--secondary);"></i> Objetivos Educacionais</span>
+                            <ul>
+                                <li>Entender escuta de eventos com `addEventListener` (ex: `submit`, `click`).</li>
+                                <li>Criar, alterar e remover elementos HTML de forma dinâmica via JavaScript.</li>
+                                <li>Modelar estados da aplicação (uma lista de objetos `{ id, texto, concluida }`).</li>
+                                <li>Aprender a usar o `localStorage` do navegador para manter o estado persistido.</li>
+                            </ul>
+                        </div>
+                        <div class="instructions-box">
+                            <span class="box-title"><i class="fa-solid fa-list-ol" style="color: var(--primary);"></i> Instruções Passo a Passo</span>
+                            <ol>
+                                <li>Desenhe o formulário de entrada (campo de texto e botão de envio) e a lista vazia `<ul>`.</li>
+                                <li>Escreva o script JS que intercepta o envio do formulário, cria um novo objeto de tarefa e renderiza um `<li>` correspondente na tela.</li>
+                                <li>Adicione um botão para marcar a tarefa como "concluída" (aplicando estilos tachados através de classes de CSS) e um botão para "deletar".</li>
+                                <li>Refatore o código para salvar a lista de tarefas em formato stringificado JSON no `localStorage` a cada alteração.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Visualizador de Código -->
+                    <div class="code-viewer-container">
+                        <div class="code-tabs">
+                            <button class="code-tab-btn active" data-file="html" onclick="switchCodeTab(this, 'html')">
+                                <i class="fa-brands fa-html5" style="color: #e34c26;"></i> index.html
+                            </button>
+                            <button class="code-tab-btn" data-file="css" onclick="switchCodeTab(this, 'css')">
+                                <i class="fa-brands fa-css3-alt" style="color: #264de4;"></i> style.css
+                            </button>
+                            <button class="code-tab-btn" data-file="js" onclick="switchCodeTab(this, 'js')">
+                                <i class="fa-brands fa-square-js" style="color: #f7df1e;"></i> app.js
+                            </button>
+                        </div>
+                        <div class="code-content-wrapper">
+                            <button class="btn-copy" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar Código</button>
+                            <!-- HTML CODE BLOCK -->
+                            <pre class="code-block code-html active"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Task Manager - Lista de Tarefas&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;main class="todo-container"&gt;
+        &lt;header class="todo-header"&gt;
+            &lt;h1&gt;&lt;i class="fa-solid fa-list-check"&gt;&lt;/i&gt; Tarefas Práticas&lt;/h1&gt;
+            &lt;p&gt;Organize seus estudos acadêmicos de forma moderna&lt;/p&gt;
+        &lt;/header&gt;
+
+        &lt;!-- Formulário para novas tarefas --&gt;
+        &lt;form id="todo-form" class="todo-form"&gt;
+            &lt;input type="text" id="todo-input" placeholder="Nova tarefa para estudar..." required maxlength="60"&gt;
+            &lt;button type="submit" aria-label="Adicionar Tarefa"&gt;
+                &lt;i class="fa-solid fa-plus"&gt;&lt;/i&gt;
+            &lt;/button&gt;
+        &lt;/form&gt;
+
+        &lt;!-- Painel de Filtros --&gt;
+        &lt;div class="filters"&gt;
+            &lt;button class="filter-btn active" data-filter="all"&gt;Todas&lt;/button&gt;
+            &lt;button class="filter-btn" data-filter="pending"&gt;Pendentes&lt;/button&gt;
+            &lt;button class="filter-btn" data-filter="completed"&gt;Concluídas&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Lista Dinâmica --&gt;
+        &lt;ul id="todo-list" class="todo-list"&gt;
+            &lt;!-- Inserção via JS --&gt;
+        &lt;/ul&gt;
+
+        &lt;!-- Rodapé informativo --&gt;
+        &lt;footer class="todo-footer"&gt;
+            &lt;span id="task-counter"&gt;0 pendentes&lt;/span&gt;
+            &lt;button id="clear-completed" class="clear-btn"&gt;Limpar Concluídas&lt;/button&gt;
+        &lt;/footer&gt;
+    &lt;/main&gt;
+
+    &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            <!-- CSS CODE BLOCK -->
+                            <pre class="code-block code-css"><code>/* ==========================================
+   RESET & VARIABLES
+   ========================================== */
+:root {
+    --bg-app: #f1f5f9;
+    --card-bg: #ffffff;
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --text-primary: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --transition: all 0.25s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg-app);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* ==========================================
+   CONTÊINER DA LISTA
+   ========================================== */
+.todo-container {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 480px;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.todo-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+}
+
+.todo-header p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+/* Formulário de Input */
+.todo-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.todo-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.todo-form input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.todo-form button {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-form button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* Filtros */
+.filters {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.4rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+/* LISTA DINÂMICA */
+.todo-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 2px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.todo-item:hover {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+}
+
+.todo-item-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+    flex: 1;
+}
+
+.todo-item-content span {
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.todo-item.completed .todo-item-content span {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.todo-item-content i {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.todo-item.completed .todo-item-content i {
+    color: #22c55e;
+}
+
+/* Botão Deletar */
+.btn-delete {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 0.25rem;
+    opacity: 0.5;
+    transition: var(--transition);
+    border-radius: 4px;
+}
+
+.btn-delete:hover {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Rodapé */
+.todo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.clear-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.clear-btn:hover {
+    text-decoration: underline;
+}</code></pre>
+                            <!-- JS CODE BLOCK -->
+                            <pre class="code-block code-js"><code>/**
+ * ============================================================================
+ * GERENCIADOR DE TAREFAS - JAVASCRIPT DE APLICAÇÃO
+ * ============================================================================
+ */
+
+// Seletor de Elementos
+const todoForm = document.getElementById('todo-form');
+const todoInput = document.getElementById('todo-input');
+const todoList = document.getElementById('todo-list');
+const taskCounter = document.getElementById('task-counter');
+const clearCompletedBtn = document.getElementById('clear-completed');
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+// Estado Global da Aplicação
+let tasks = JSON.parse(localStorage.getItem('my_academy_tasks')) || [];
+let currentFilter = 'all';
+
+// Função: Atualizar Contador de Pendentes
+function updateCounter() {
+    const pendings = tasks.filter(t => !t.completed).length;
+    taskCounter.textContent = `${pendings} ${pendings === 1 ? 'pendente' : 'pendentes'}`;
+}
+
+// Função: Persistir no LocalStorage
+function saveToStorage() {
+    localStorage.setItem('my_academy_tasks', JSON.stringify(tasks));
+}
+
+// Função: Renderizar Lista na Tela
+function renderTasks() {
+    // Limpar lista existente
+    todoList.innerHTML = '';
+
+    // Filtrar tarefas baseado na seleção ativa
+    const filteredTasks = tasks.filter(task => {
+        if (currentFilter === 'pending') return !task.completed;
+        if (currentFilter === 'completed') return task.completed;
+        return true;
+    });
+
+    if (filteredTasks.length === 0) {
+        todoList.innerHTML = `<li class="todo-item" style="justify-content: center; color: var(--text-muted); font-size: 0.85rem;">Nenhuma tarefa encontrada.</li>`;
+        updateCounter();
+        return;
+    }
+
+    filteredTasks.forEach(task => {
+        const li = document.createElement('li');
+        li.className = `todo-item ${task.completed ? 'completed' : ''}`;
+
+        li.innerHTML = `
+            <div class="todo-item-content" onclick="toggleTaskStatus(${task.id})">
+                <i class="${task.completed ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle'}"></i>
+                <span>${escapeHTML(task.text)}</span>
+            </div>
+            <button class="btn-delete" onclick="deleteTask(${task.id})" aria-label="Remover tarefa">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        `;
+        todoList.appendChild(li);
+    });
+
+    updateCounter();
+}
+
+// Helper para prevenir injeções de HTML maliciosas (XSS)
+function escapeHTML(text) {
+    const div = document.createElement('div');
+    div.innerText = text;
+    return div.innerHTML;
+}
+
+// Função: Adicionar Nova Tarefa
+todoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const taskText = todoInput.value.trim();
+    if (!taskText) return;
+
+    const newTask = {
+        id: Date.now(),
+        text: taskText,
+        completed: false
+    };
+
+    tasks.push(newTask);
+    todoInput.value = '';
+    
+    saveToStorage();
+    renderTasks();
+});
+
+// Função: Alternar Status Concluído/Pendente
+window.toggleTaskStatus = function(id) {
+    tasks = tasks.map(task => {
+        if (task.id === id) {
+            return { ...task, completed: !task.completed };
+        }
+        return task;
+    });
+    saveToStorage();
+    renderTasks();
+};
+
+// Função: Deletar Tarefa
+window.deleteTask = function(id) {
+    tasks = tasks.filter(task => task.id !== id);
+    saveToStorage();
+    renderTasks();
+};
+
+// Função: Limpar Todas as Concluídas
+clearCompletedBtn.addEventListener('click', () => {
+    tasks = tasks.filter(task => !task.completed);
+    saveToStorage();
+    renderTasks();
+});
+
+// Manipulador dos Botões de Filtro
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentFilter = e.target.getAttribute('data-filter');
+        renderTasks();
+    });
+});
+
+// Inicialização Inicial
+renderTasks();</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+                 TAB: ATIVIDADE 3 (VITRINE DE PRODUTOS)
+                 ========================================================================== -->
+            <div id="atividade3" class="tab-content">
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div>
+                            <span class="badge badge-hard" style="margin-bottom: 0.5rem; display: inline-block;">Nível: Avançado</span>
+                            <h2 class="activity-title">Atividade 3: Vitrine Virtual com Carrinho</h2>
+                        </div>
+                        <button class="btn-sandbox" onclick="loadActivityToSandbox('atividade3')">
+                            <i class="fa-solid fa-play"></i> Testar no Sandbox
+                        </button>
+                    </div>
+                    <p class="activity-desc">Criação de um e-commerce em miniatura. Introduz conceitos vitais como a renderização dinâmica de dados estruturados (JSON), mecanismos de busca de texto, ordenação de dados e lógica acumuladora complexa para compras.</p>
+                    
+                    <div class="details-grid">
+                        <div class="objectives-box">
+                            <span class="box-title"><i class="fa-solid fa-bullseye" style="color: var(--secondary);"></i> Objetivos Educacionais</span>
+                            <ul>
+                                <li>Trabalhar com estruturas de dados baseadas em **JSON** e listas.</li>
+                                <li>Dominar métodos funcionais de manipulação de arrays: `map()`, `filter()` e `reduce()`.</li>
+                                <li>Desenvolver barra de buscas responsiva (filtragem por caractere digitado).</li>
+                                <li>Entender acúmulos aritméticos em JavaScript para computar totais financeiros e quantidades.</li>
+                            </ul>
+                        </div>
+                        <div class="instructions-box">
+                            <span class="box-title"><i class="fa-solid fa-list-ol" style="color: var(--primary);"></i> Instruções Passo a Passo</span>
+                            <ol>
+                                <li>Estruture o catálogo inicial contendo pelo menos 4 produtos em um array JS de objetos.</li>
+                                <li>Estilize o grid de produtos com CSS Grid, garantindo que seja responsivo.</li>
+                                <li>Implemente a barra de pesquisa que atualiza a vitrine dinamicamente à medida que o usuário escreve (evento `input`).</li>
+                                <li>Desenvolva a funcionalidade de adicionar produtos ao carrinho, atualizando o modal lateral com a contagem total, subtotal financeiro e opção de remover itens individualmente.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Visualizador de Código -->
+                    <div class="code-viewer-container">
+                        <div class="code-tabs">
+                            <button class="code-tab-btn active" data-file="html" onclick="switchCodeTab(this, 'html')">
+                                <i class="fa-brands fa-html5" style="color: #e34c26;"></i> index.html
+                            </button>
+                            <button class="code-tab-btn" data-file="css" onclick="switchCodeTab(this, 'css')">
+                                <i class="fa-brands fa-css3-alt" style="color: #264de4;"></i> style.css
+                            </button>
+                            <button class="code-tab-btn" data-file="js" onclick="switchCodeTab(this, 'js')">
+                                <i class="fa-brands fa-square-js" style="color: #f7df1e;"></i> app.js
+                            </button>
+                        </div>
+                        <div class="code-content-wrapper">
+                            <button class="btn-copy" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar Código</button>
+                            <!-- HTML CODE BLOCK -->
+                            <pre class="code-block code-html active"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;DevTech - Vitrine Tecnológica&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- Barra Superior --&gt;
+    &lt;header class="nav-bar"&gt;
+        &lt;div class="nav-brand"&gt;&lt;i class="fa-solid fa-laptop-code"&gt;&lt;/i&gt; DevStore&lt;/div&gt;
+        
+        &lt;!-- Barra de Busca Integrada --&gt;
+        &lt;div class="search-box"&gt;
+            &lt;input type="text" id="search-input" placeholder="Pesquisar periféricos..."&gt;
+            &lt;i class="fa-solid fa-magnifying-glass"&gt;&lt;/i&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Botão Carrinho --&gt;
+        &lt;button class="cart-trigger" id="cart-btn"&gt;
+            &lt;i class="fa-solid fa-basket-shopping"&gt;&lt;/i&gt;
+            &lt;span id="cart-counter" class="cart-counter"&gt;0&lt;/span&gt;
+        &lt;/button&gt;
+    &lt;/header&gt;
+
+    &lt;!-- CONTEÚDO PRINCIPAL (Duas colunas: Grid de Produtos e Carrinho lateral) --&gt;
+    &lt;div class="main-layout"&gt;
+        &lt;section class="catalog"&gt;
+            &lt;h2 class="section-title"&gt;Nossos Equipamentos&lt;/h2&gt;
+            &lt;div class="product-grid" id="product-grid"&gt;
+                &lt;!-- Renderização Dinâmica via JS --&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;!-- Carrinho Lateral --&gt;
+        &lt;aside class="cart-panel" id="cart-panel"&gt;
+            &lt;h2 class="cart-title"&gt;&lt;i class="fa-solid fa-bag-shopping"&gt;&lt;/i&gt; Resumo do Carrinho&lt;/h2&gt;
+            
+            &lt;div class="cart-items" id="cart-items"&gt;
+                &lt;!-- Itens adicionados aparecem aqui --&gt;
+            &lt;/div&gt;
+
+            &lt;div class="cart-summary"&gt;
+                &lt;div class="summary-row"&gt;
+                    &lt;span&gt;Itens Totais:&lt;/span&gt;
+                    &lt;span id="summary-qty"&gt;0&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class="summary-row total"&gt;
+                    &lt;span&gt;Valor Total:&lt;/span&gt;
+                    &lt;span id="summary-total"&gt;R$ 0,00&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;button class="btn-checkout" id="checkout-btn" disabled&gt;Finalizar Aquisição&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/aside&gt;
+    &lt;/div&gt;
+
+    &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            <!-- CSS CODE BLOCK -->
+                            <pre class="code-block code-css"><code>/* ==========================================
+   RESET & SYSTEM VARIABLE
+   ========================================== */
+:root {
+    --primary: #0ea5e9;         /* Sky Blue */
+    --primary-dark: #0284c7;
+    --bg-main: #f8fafc;
+    --panel-bg: #ffffff;
+    --border: #e2e8f0;
+    --text-dark: #0f172a;
+    --text-gray: #64748b;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-dark);
+    line-height: 1.5;
+}
+
+/* ==========================================
+   CABECALHO & BUSCA
+   ========================================== */
+.nav-bar {
+    background: var(--panel-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.nav-brand {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.search-box input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-gray);
+}
+
+.cart-trigger {
+    background: #f0f9ff;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    color: var(--primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.15rem;
+    transition: all 0.2s ease;
+}
+
+.cart-trigger:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.cart-counter {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--panel-bg);
+}
+
+/* ==========================================
+   GRID DE PRODUTOS & COMPONENTES
+   ========================================== */
+.main-layout {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 2rem;
+}
+
+@media (max-width: 850px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.section-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all 0.25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.product-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.product-price {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.btn-add {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.btn-add:hover {
+    background: var(--primary-dark);
+}
+
+/* ==========================================
+   PAINEL DE CARRINHO
+   ========================================== */
+.cart-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-self: flex-start;
+}
+
+.cart-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-items {
+    max-height: 250px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 0.875rem;
+}
+
+.cart-item-name {
+    font-weight: 500;
+}
+
+.cart-item-remove {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+}
+
+.cart-summary {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.summary-row.total {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.btn-checkout {
+    background: #22c55e;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-checkout:hover:not(:disabled) {
+    background: #16a34a;
+}
+
+.btn-checkout:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+}</code></pre>
+                            <!-- JS CODE BLOCK -->
+                            <pre class="code-block code-js"><code>/**
+ * ============================================================================
+ * VITRINE VIRTUAL - JAVASCRIPT DE APLICAÇÃO
+ * ============================================================================
+ */
+
+// Produtos Estruturados (Mock de API)
+const products = [
+    { id: 1, name: 'Teclado Mecânico RGB', price: 299.90, img: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=300&h=200&fit=crop' },
+    { id: 2, name: 'Mouse Gamer Pro 16K', price: 159.90, img: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=300&h=200&fit=crop' },
+    { id: 3, name: 'Headset Spatial Audio', price: 429.90, img: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=300&h=200&fit=crop' },
+    { id: 4, name: 'Mousepad Gamer Extended', price: 89.90, img: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=300&h=200&fit=crop' }
+];
+
+// Carrinho de Compras (Estado da Aplicação)
+let cart = [];
+
+// Seleção de Componentes do DOM
+const productGrid = document.getElementById('product-grid');
+const cartItemsContainer = document.getElementById('cart-items');
+const cartCounter = document.getElementById('cart-counter');
+const summaryQty = document.getElementById('summary-qty');
+const summaryTotal = document.getElementById('summary-total');
+const checkoutBtn = document.getElementById('checkout-btn');
+const searchInput = document.getElementById('search-input');
+
+// Função: Renderizar Produtos no Grid
+function renderCatalog(filterText = '') {
+    productGrid.innerHTML = '';
+    
+    // Filtrar produtos baseados no texto de busca (case-insensitive)
+    const filtered = products.filter(p => 
+        p.name.toLowerCase().includes(filterText.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+        productGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-gray); padding: 2rem;">Nenhum periférico encontrado.</div>`;
+        return;
+    }
+
+    filtered.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <img src="${p.img}" alt="${p.name}" class="product-img">
+            <h3 class="product-name">${p.name}</h3>
+            <p class="product-price">R$ ${p.price.toFixed(2).replace('.', ',')}</p>
+            <button class="btn-add" onclick="addToCart(${p.id})">Adicionar</button>
+        `;
+        productGrid.appendChild(card);
+    });
+}
+
+// Função: Atualizar painel do Carrinho e Cálculos
+function updateCartUI() {
+    cartItemsContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `<div style="text-align: center; color: var(--text-gray); font-size: 0.85rem; padding: 1rem 0;">Seu carrinho está vazio.</div>`;
+        cartCounter.textContent = '0';
+        summaryQty.textContent = '0';
+        summaryTotal.textContent = 'R$ 0,00';
+        checkoutBtn.disabled = true;
+        return;
+    }
+
+    // Gerar elementos para cada item
+    cart.forEach(item => {
+        const itemRow = document.createElement('div');
+        itemRow.className = 'cart-item';
+        itemRow.innerHTML = `
+            <div>
+                <span class="cart-item-name">${item.name}</span>
+                <div style="color: var(--text-gray); font-size: 0.75rem;">Qty: ${item.qty}</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <strong>R$ ${(item.price * item.qty).toFixed(2).replace('.', ',')}</strong>
+                <button class="cart-item-remove" onclick="removeFromCart(${item.id})"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        `;
+        cartItemsContainer.appendChild(itemRow);
+    });
+
+    // Calcular valores agregados usando métodos funcionais
+    const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+    const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+    cartCounter.textContent = totalQty;
+    summaryQty.textContent = totalQty;
+    summaryTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+    checkoutBtn.disabled = false;
+}
+
+// Função: Adicionar ao Carrinho
+window.addToCart = function(id) {
+    const product = products.find(p => p.id === id);
+    const existing = cart.find(item => item.id === id);
+
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        cart.push({ ...product, qty: 1 });
+    }
+
+    updateCartUI();
+};
+
+// Função: Remover do Carrinho
+window.removeFromCart = function(id) {
+    cart = cart.filter(item => item.id !== id);
+    updateCartUI();
+};
+
+// Evento: Filtrar ao Digitar na Barra de Pesquisa
+searchInput.addEventListener('input', (e) => {
+    renderCatalog(e.target.value);
+});
+
+// Evento: Checkout Final
+checkoutBtn.addEventListener('click', () => {
+    alert('Aquisição simulada com sucesso! Obrigado por testar o DevStore.');
+    cart = [];
+    updateCartUI();
+});
+
+// Inicialização Inicial
+renderCatalog();
+updateCartUI();</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+                 TAB: ATIVIDADE 4 (PHP & MYSQL FULLSTACK)
+                 ========================================================================== -->
+            <div id="atividade4" class="tab-content">
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div>
+                            <span class="badge badge-fullstack" style="margin-bottom: 0.5rem; display: inline-block;">Nível: Fullstack</span>
+                            <h2 class="activity-title">Atividade 4: Integração de Formulário com PHP & MySQL</h2>
+                        </div>
+                        <span class="badge badge-fullstack" style="padding: 0.5rem 1rem;"><i class="fa-solid fa-server"></i> Arquitetura Cliente-Servidor</span>
+                    </div>
+                    <p class="activity-desc">Construção de uma solução fullstack de formulário de contato acadêmico. Ensina o ciclo de envio de formulários (HTTP POST), conexão segura com banco de dados usando **PDO**, e prevenção contra vulnerabilidades de injeção SQL.</p>
+                    
+                    <div class="details-grid">
+                        <div class="objectives-box">
+                            <span class="box-title"><i class="fa-solid fa-bullseye" style="color: var(--secondary);"></i> Objetivos Educacionais</span>
+                            <ul>
+                                <li>Compreender o papel do backend (PHP) no processamento de requisições de servidores.</li>
+                                <li>Dominar conexões robustas e seguras com banco de dados relacional via **PDO**.</li>
+                                <li>Aplicar sanitização e filtragem rigorosa de dados de entrada.</li>
+                                <li>Implementar **Prepared Statements** em SQL para anular riscos de ataques por SQL Injection.</li>
+                            </ul>
+                        </div>
+                        <div class="instructions-box">
+                            <span class="box-title"><i class="fa-solid fa-list-ol" style="color: var(--primary);"></i> Fluxo de Configuração Local</span>
+                            <ol>
+                                <li>Ative o Apache e o MySQL em seu ambiente local (ex: painel do XAMPP).</li>
+                                <li>Acesse o *phpMyAdmin* e execute o arquivo de banco (`schema.sql`) para criar o banco de dados e a tabela correspondente.</li>
+                                <li>Mova esta pasta de exemplo (`atividade4/`) para a raiz do seu servidor local (pasta `htdocs` ou `www`).</li>
+                                <li>Preencha o formulário em seu navegador e valide o cadastro acessando os registros na tabela do banco de dados.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Diagrama de BD -->
+                    <div class="php-concept-card">
+                        <div class="php-concept-header">
+                            <i class="fa-solid fa-network-wired" style="color: var(--secondary); font-size: 1.25rem;"></i>
+                            <span class="php-concept-title">Arquitetura de Dados Proposta</span>
+                        </div>
+                        <div class="database-diagram">
++------------------------------------------------------------+
+| DATABASE: academia_feedback                                |
++------------------------------------------------------------+
+| TABLE: feedbacks                                           |
+| - id: INT AUTO_INCREMENT PRIMARY KEY                       |
+| - nome: VARCHAR(100) NOT NULL                              |
+| - email: VARCHAR(100) NOT NULL                             |
+| - mensagem: TEXT NOT NULL                                  |
+| - data_envio: TIMESTAMP DEFAULT CURRENT_TIMESTAMP          |
++------------------------------------------------------------+</div>
+                    </div>
+
+                    <!-- Visualizador de Código -->
+                    <div class="code-viewer-container">
+                        <div class="code-tabs">
+                            <button class="code-tab-btn active" data-file="sql" onclick="switchCodeTab(this, 'sql')">
+                                <i class="fa-solid fa-database" style="color: #00758f;"></i> schema.sql
+                            </button>
+                            <button class="code-tab-btn" data-file="config" onclick="switchCodeTab(this, 'config')">
+                                <i class="fa-brands fa-php" style="color: #777bb4;"></i> config.php
+                            </button>
+                            <button class="code-tab-btn" data-file="index" onclick="switchCodeTab(this, 'index')">
+                                <i class="fa-brands fa-php" style="color: #777bb4;"></i> index.php
+                            </button>
+                            <button class="code-tab-btn" data-file="salvar" onclick="switchCodeTab(this, 'salvar')">
+                                <i class="fa-brands fa-php" style="color: #777bb4;"></i> salvar.php
+                            </button>
+                        </div>
+                        <div class="code-content-wrapper">
+                            <button class="btn-copy" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar Código</button>
+                            <!-- SQL CODE BLOCK -->
+                            <pre class="code-block code-sql active"><code>-- 1. Criação do Banco de Dados Relacional
+CREATE DATABASE IF NOT EXISTS academia_feedback 
+DEFAULT CHARACTER SET utf8mb4 
+COLLATE utf8mb4_unicode_ci;
+
+USE academia_feedback;
+
+-- 2. Criação da Tabela de Armazenamento
+CREATE TABLE IF NOT EXISTS feedbacks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    mensagem TEXT NOT NULL,
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;</code></pre>
+                            <!-- CONFIG PHP CODE BLOCK -->
+                            <pre class="code-block code-config"><code>&lt;?php
+/**
+ * ============================================================================
+ * SCRIPT DE CONFIGURAÇÃO - CONEXÃO COM BANCO DE DADOS (PDO)
+ * ============================================================================
+ */
+
+// Definições de Credenciais
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', ''); // Senha padrão vazia no XAMPP
+define('DB_NAME', 'academia_feedback');
+
+try {
+    // String de Conexão DSN com suporte a UTF-8 nativo
+    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+    
+    // Configurações Adicionais do Driver PDO
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Lança exceções em caso de erros SQL
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Retorna resultados como arrays associativos
+        PDO::ATTR_EMULATE_PREPARES   => false,                  // Desativa emulação de preparado para máxima segurança
+    ];
+
+    // Criação da Conexão
+    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+
+} catch (PDOException $e) {
+    // Tratamento Robusto de Falha de Conexão
+    die("Falha crítica de conexão com o Banco de Dados: " . $e-&gt;getMessage());
+}
+?&gt;</code></pre>
+                            <!-- INDEX PHP CODE BLOCK -->
+                            <pre class="code-block code-index"><code>&lt;?php 
+// Importação da conexão para listagem posterior
+require_once 'config.php'; 
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Formulário de Feedback Acadêmico&lt;/title&gt;
+    &lt;style&gt;
+        /* Estilos rápidos para demonstração organizada em sala de aula */
+        body { font-family: system-ui, sans-serif; background: #f1f5f9; padding: 2rem; }
+        .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; max-width: 1100px; margin: 0 auto; }
+        .box { background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
+        .btn { background: #2563eb; color: #ffffff; border: none; padding: 0.65rem 1.25rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn:hover { background: #1d4ed8; }
+        .feedback-item { border-bottom: 1px solid #e2e8f0; padding: 1rem 0; }
+        .feedback-item:last-child { border: none; }
+        .success { color: #16a34a; background: #dcfce7; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;div class="grid"&gt;
+        
+        &lt;!-- Coluna 1: O Formulário --&gt;
+        &lt;div class="box"&gt;
+            &lt;h2&gt;Enviar Feedback&lt;/h2&gt;
+            
+            &lt;?php if (isset($_GET['sucesso'])): ?&gt;
+                &lt;div class="success"&gt;Feedback salvo com sucesso no MySQL!&lt;/div&gt;
+            &lt;?php endif; ?&gt;
+
+            &lt;form action="salvar.php" method="POST"&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;label for="nome"&gt;Nome Completo&lt;/label&gt;
+                    &lt;input type="text" id="nome" name="nome" required maxlength="100"&gt;
+                &lt;/div&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;label for="email"&gt;E-mail Acadêmico&lt;/label&gt;
+                    &lt;input type="email" id="email" name="email" required maxlength="100"&gt;
+                &lt;/div&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;label for="mensagem"&gt;Sua Mensagem&lt;/label&gt;
+                    &lt;textarea id="mensagem" name="mensagem" rows="5" required&gt;&lt;/textarea&gt;
+                &lt;/div&gt;
+                &lt;button type="submit" class="btn"&gt;Enviar Registro&lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Coluna 2: Lista de Feedbacks salvos --&gt;
+        &lt;div class="box"&gt;
+            &lt;h2&gt;Feedbacks Armazenados no MySQL&lt;/h2&gt;
+            &lt;div&gt;
+                &lt;?php
+                try {
+                    // Seleciona registros ordenando do mais recente para o mais antigo
+                    $stmt = $pdo-&gt;query("SELECT nome, email, mensagem, data_envio FROM feedbacks ORDER BY data_envio DESC");
+                    $feedbacks = $stmt-&gt;fetchAll();
+
+                    if (count($feedbacks) === 0) {
+                        echo "&lt;p style='color:#64748b;'&gt;Nenhum registro encontrado no banco de dados.&lt;/p&gt;";
+                    } else {
+                        foreach ($feedbacks as $fb) {
+                            echo "&lt;div class='feedback-item'&gt;";
+                            // htmlspecialchars previne falhas graves de Cross-Site Scripting (XSS)
+                            echo "&lt;h4&gt;" . htmlspecialchars($fb['nome']) . " &lt;span style='font-weight:normal; font-size:0.8rem; color:#64748b;'&gt;(" . htmlspecialchars($fb['email']) . ")&lt;/span&gt;&lt;/h4&gt;";
+                            echo "&lt;p style='font-size:0.9rem;'&gt;" . nl2br(htmlspecialchars($fb['mensagem'])) . "&lt;/p&gt;";
+                            echo "&lt;small style='color:#94a3b8;'&gt;Enviado em: " . date('d/m/Y H:i', strtotime($fb['data_envio'])) . "&lt;/small&gt;";
+                            echo "&lt;/div&gt;";
+                        }
+                    }
+                } catch (PDOException $e) {
+                    echo "&lt;p style='color:#ef4444;'&gt;Erro ao listar dados: " . htmlspecialchars($e-&gt;getMessage()) . "&lt;/p&gt;";
+                }
+                ?&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            <!-- SALVAR PHP CODE BLOCK -->
+                            <pre class="code-block code-salvar"><code>&lt;?php
+/**
+ * ============================================================================
+ * SCRIPT DE SALVAMENTO - INSERÇÃO SEGURA VIA PREPARED STATEMENTS
+ * ============================================================================
+ */
+
+// 1. Validar se a requisição é do tipo POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // Redireciona de volta em caso de acessos indevidos
+    header('Location: index.php');
+    exit;
+}
+
+// 2. Importar conexão do BD
+require_once 'config.php';
+
+// 3. Capturar e Sanitizar Dados (Combate a dados sujos de entrada)
+$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+$mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_SPECIAL_CHARS);
+
+// Tratar falhas de sanitização/validação
+if (!$nome || !$email || !$mensagem) {
+    die("Falha de Validação: Certifique-se de preencher todos os campos corretamente.");
+}
+
+try {
+    // 4. Preparação da Query SQL com Placeholders (Impede Injeção SQL)
+    $sql = "INSERT INTO feedbacks (nome, email, mensagem) VALUES (:nome, :email, :mensagem)";
+    $stmt = $pdo-&gt;prepare($sql);
+
+    // 5. Vincular parâmetros e Executar com os dados higienizados
+    $stmt-&gt;execute([
+        ':nome'     =&gt; $nome,
+        ':email'    =&gt; $email,
+        ':mensagem' =&gt; $mensagem
+    ]);
+
+    // 6. Redirecionamento com sinal de Sucesso
+    header('Location: index.php?sucesso=1');
+    exit;
+
+} catch (PDOException $e) {
+    // Em produção, nunca exiba detalhes do banco de dados. Salve em logs.
+    die("Erro grave de banco de dados ao salvar feedback: " . $e-&gt;getMessage());
+}
+?&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+                 TAB: LIVE SANDBOX PLAYGROUND
+                 ========================================================================== -->
+            <div id="sandbox" class="tab-content">
+                <div class="activity-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 0.5rem;">
+                        <div>
+                            <h2 style="font-size: 1.75rem; font-weight: 700; color: var(--secondary);"><i class="fa-solid fa-wand-magic-sparkles"></i> Live Sandbox</h2>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">Escreva seu próprio código HTML, CSS e JavaScript e veja o resultado renderizado instantaneamente ao lado!</p>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn-sandbox" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171;" onclick="clearSandbox()">
+                                <i class="fa-solid fa-trash-arrow-up"></i> Limpar
+                            </button>
+                            <button class="btn-sandbox" onclick="runSandbox()">
+                                <i class="fa-solid fa-rotate"></i> Renderizar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sandbox-grid">
+                        <!-- Editores de Código -->
+                        <div class="sandbox-editors">
+                            <div class="editor-selector-tabs">
+                                <button class="editor-tab-btn active" data-editor="html" onclick="switchEditorTab('html')">HTML5</button>
+                                <button class="editor-tab-btn" data-editor="css" onclick="switchEditorTab('css')">CSS3</button>
+                                <button class="editor-tab-btn" data-editor="js" onclick="switchEditorTab('js')">JavaScript</button>
+                            </div>
+                            
+                            <!-- HTML Editor -->
+                            <div id="editor-html-container" class="editor-textarea-container active">
+                                <textarea id="sandbox-html-code" placeholder="&lt;!-- Insira seu HTML aqui --&gt;
+&lt;h1&gt;Olá, Mundo!&lt;/h1&gt;
+&lt;p&gt;Altere meu estilo na aba CSS e dê vida com JavaScript!&lt;/p&gt;
+&lt;button id='myBtn'&gt;Clique em Mim&lt;/button&gt;"></textarea>
+                            </div>
+
+                            <!-- CSS Editor -->
+                            <div id="editor-css-container" class="editor-textarea-container">
+                                <textarea id="sandbox-css-code" placeholder="/* Insira seu CSS aqui */
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f1f5f9;
+}
+h1 {
+    color: #4f46e5;
+}
+button {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}"></textarea>
+                            </div>
+
+                            <!-- JS Editor -->
+                            <div id="editor-js-container" class="editor-textarea-container">
+                                <textarea id="sandbox-js-code" placeholder="// Insira seu JavaScript aqui
+const btn = document.getElementById('myBtn');
+btn.addEventListener('click', () => {
+    alert('JavaScript rodando de forma dinâmica no Sandbox!');
+});"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Iframe de Visualização -->
+                        <div class="sandbox-preview">
+                            <div class="preview-header">
+                                <span class="preview-title"><i class="fa-solid fa-display"></i> Preview do Navegador</span>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="font-size: 0.75rem; color: var(--text-muted);">Status: Ativo</span>
+                                    <div class="preview-status"></div>
+                                </div>
+                            </div>
+                            <iframe id="sandbox-preview-frame" class="preview-iframe"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         FOOTER
+         ========================================================================== -->
+    <footer>
+        <p>&copy; 2026 Web Dev Hub & Playground. Desenvolvido para capacitação em Programação Web.</p>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">HTML5 • CSS3 • ES6 JavaScript • PHP • MySQL</p>
+    </footer>
+
+    <!-- Lógica JavaScript Principal -->
+    <script src="app.js"></script>
+</body>
+</html></code></pre>
