@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriEscolar EENF • Consulta e Avaliação do Cardápio Escolar</title>
+    <meta name="description" content="Sistema completo para consulta diária e avaliação do cardápio escolar com estatísticas e banco de dados SQL.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="brand">
+                <div class="brand-icon">🥗</div>
+                <div class="brand-text">
+                    <h1>NutriEscolar - E.E. Nísia Floresta</h1>
+                    <span>Cardápio & Avaliação</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><button class="nav-link active" data-view="view-cardapio">📅 Cardápio</button></li>
+                    <li><button class="nav-link" data-view="view-avaliar">⭐ Avaliar</button></li>
+                    <li><button class="nav-link" data-view="view-estatisticas">📊 Estatísticas</button></li>
+                    <li><button class="nav-link" data-view="view-sql">💾 Console SQL</button></li>
+                    <li><button class="nav-link" data-view="view-sobre">ℹ️ Sobre</button></li>
+                </ul>
+            </nav>
+
+            <button class="theme-toggle" id="themeToggle" title="Alternar Modo Escuro/Claro">🌙</button>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container">
+
+        <!-- HERO BANNER -->
+        <section class="hero-banner">
+            <div class="hero-content">
+                <span class="hero-badge">✨ Alimentação Escolar Saudável</span>
+                <h2>Consulte o Cardápio & Dê Sua Opinião!</h2>
+                <p>Acompanhe diariamente as refeições servidas na escola, veja informações nutricionais e ajude nossa equipe a melhorar a merenda escolar através de avaliações em tempo real.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-accent" onclick="document.querySelector('[data-view=\'view-avaliar\']').click()">
+                        ⭐ Avaliar Refeição de Hoje
+                    </button>
+                    <button class="btn btn-outline-white" onclick="document.querySelector('[data-view=\'view-sql\']').click()">
+                        💾 Ver Banco de Dados SQL
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABA 1: CONSULTA DO CARDÁPIO -->
+        <section id="view-cardapio" class="view-section active">
+            <div class="day-selector-bar">
+                <h2 class="section-title" id="currentDayTitle">Cardápios da Semana</h2>
+                <div class="days-pills" id="daysContainer">
+                    <!-- Gerado via JavaScript -->
+                </div>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <!-- Cards de refeições gerados via JavaScript -->
+            </div>
+        </section>
+
+        <!-- ABA 2: FORMULÁRIO DE AVALIAÇÃO -->
+        <section id="view-avaliar" class="view-section">
+            <div class="eval-card">
+                <h2 class="section-title" style="margin-bottom: 8px;">⭐ Avaliar Merenda Escolar</h2>
+                <p style="color: var(--text-muted); margin-bottom: 24px;">Sua opinião é fundamental para a qualidade da alimentação em nossa escola!</p>
+
+                <form id="evalForm">
+                    <div class="form-group">
+                        <label for="dishSelect">Selecione o Prato ou Refeição:</label>
+                        <select id="dishSelect" class="form-control" required>
+                            <!-- Populado via JS -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sua Nota (1 a 5 Estrelas):</label>
+                        <div class="star-rating-input" id="starRatingInput">
+                            <span data-star="1">★</span>
+                            <span data-star="2">★</span>
+                            <span data-star="3">★</span>
+                            <span data-star="4">★</span>
+                            <span data-star="5">★</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Qual aspecto se destacou?</label>
+                        <div class="feedback-categories">
+                            <button type="button" class="category-chip" data-cat="Sabor">😋 Sabor</button>
+                            <button type="button" class="category-chip" data-cat="Temperatura">🌡️ Temperatura</button>
+                            <button type="button" class="category-chip" data-cat="Apresentação">🎨 Apresentação</button>
+                            <button type="button" class="category-chip" data-cat="Porção">🍽️ Tamanho da Porção</button>
+                            <button type="button" class="category-chip" data-cat="Variedade">🥗 Variedade Nutricional</button>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="form-group">
+                            <label for="userTypeSelect">Quem é você?</label>
+                            <select id="userTypeSelect" class="form-control" required>
+                                <option value="Aluno">Aluno(a)</option>
+                                <option value="Professor">Professor(a)</option>
+                                <option value="Funcionário">Funcionário(a)</option>
+                                <option value="Responsável">Pai / Responsável</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userGradeInput">Turma / Série (Opcional):</label>
+                            <input type="text" id="userGradeInput" class="form-control" placeholder="Ex: 8º Ano B, 3º EM">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="evalComment">Comentário ou Sugestão:</label>
+                        <textarea id="evalComment" class="form-control" rows="3" placeholder="Conte mais sobre o que achou da comida hoje..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem;">
+                        📩 Enviar Avaliação para o Banco de Dados
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ABA 3: ESTATÍSTICAS E RELATÓRIOS -->
+        <section id="view-estatisticas" class="view-section">
+            <h2 class="section-title" style="margin-bottom: 24px;">📊 Relatório de Satisfação da Merenda</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon green">📝</div>
+                    <div class="stat-info">
+                        <h4>Total de Avaliações</h4>
+                        <div class="value" id="statTotalReviews">0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon amber">⭐</div>
+                    <div class="stat-info">
+                        <h4>Média Geral de Satisfação</h4>
+                        <div class="value" id="statAvgScore">0.0 / 5.0</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">🏆</div>
+                    <div class="stat-info">
+                        <h4>Prato Campeão de Notas</h4>
+                        <div class="value" id="statTopDish" style="font-size: 1.2rem;">Carregando...</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 16px;">💬 Últimos Comentários e Feedbacks</h3>
+            <div class="feedbacks-list" id="recentFeedbacksList">
+                <!-- Inserido via JS -->
+            </div>
+        </section>
+
+        <!-- ABA 4: CONSOLE E ESTRUTURA SQL -->
+        <section id="view-sql" class="view-section">
+            <div class="sql-container">
+                <div class="sql-header">
+                    <div>
+                        <h3 style="margin-bottom: 4px;">💾 Terminal & Banco de Dados SQL</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Execute comandos SQL reais e teste consultas na tabela do sistema escolar.</p>
+                    </div>
+
+                    <select id="sqlPresetSelect" class="preset-queries-dropdown">
+                        <option value="">-- Escolher Consulta SQL Pronta --</option>
+                        <option value="all_pratos">Pratos e Calorias (SELECT)</option>
+                        <option value="avg_ratings">Média de Notas por Prato (GROUP BY)</option>
+                        <option value="all_avaliacoes">Todas as Avaliações Registradas</option>
+                        <option value="segunda_menu">Cardápio da Segunda-feira</option>
+                    </select>
+                </div>
+
+                <div class="sql-editor-box">
+                    <textarea id="sqlQueryInput" class="sql-textarea" spellcheck="false">SELECT id, nome, categoria, calorias, proteinas FROM pratos ORDER BY calorias DESC;</textarea>
+                    
+                    <div class="sql-controls">
+                        <button class="btn btn-primary" id="btnRunSql">⚡ Executar Query SQL</button>
+                        <a href="database.sql" download class="btn btn-secondary">📥 Baixar Arquivo database.sql</a>
+                    </div>
+                </div>
+
+                <div id="sqlResultBox" class="sql-table-wrapper">
+                    <!-- Tabela de resultados SQL -->
+                </div>
+            </div>
+
+            <div style="margin-top: 32px; background: var(--bg-surface); padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border);">
+                <h3>📄 Schema SQL Completo do Sistema (DDL)</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Você pode copiar o código abaixo e rodar em qualquer banco SQL como SQLite, MySQL ou PostgreSQL:</p>
+                <pre style="background: var(--bg-subtle); padding: 16px; border-radius: var(--radius-md); font-size: 0.85rem; overflow-x: auto; font-family: monospace; color: var(--text-main);">
+CREATE TABLE pratos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    descricao TEXT,
+    calorias INT DEFAULT 0,
+    proteinas_g DECIMAL(5,1) DEFAULT 0.0,
+    contem_gluten BOOLEAN DEFAULT FALSE,
+    contem_lactose BOOLEAN DEFAULT FALSE,
+    eh_vegetariano BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE avaliacoes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cardapio_id INT NOT NULL,
+    prato_id INT,
+    nota INT CHECK(nota BETWEEN 1 AND 5),
+    categoria_feedback VARCHAR(50),
+    comentario TEXT,
+    tipo_usuario VARCHAR(30) DEFAULT 'Aluno',
+    data_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP
+);</pre>
+            </div>
+        </section>
+
+        <!-- ABA 5: SOBRE -->
+        <section id="view-sobre" class="view-section">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px;">
+                <h2 class="section-title" style="margin-bottom: 16px;">ℹ️ Sobre o Projeto NutriEscolar</h2>
+                <p style="margin-bottom: 16px;">Este site foi desenvolvido com as tecnologias web mais simples e eficientes para solucionar um desafio comum nas escolas: a <strong>transparência do cardápio escolar</strong> e o <strong>engajamento dos estudantes na avaliação nutricional</strong>.</p>
+                
+                <h3 style="margin-top: 24px; margin-bottom: 12px;">🛠️ Tecnologias Utilizadas (100% Gratuitas)</h3>
+                <ul style="margin-left: 20px; line-height: 1.8; color: var(--text-muted);">
+                    <li><strong>HTML5:</strong> Estrutura semântica e acessível da aplicação.</li>
+                    <li><strong>CSS3:</strong> Estilização moderna com CSS Variables, Flexbox, CSS Grid, e modo escuro/claro automático.</li>
+                    <li><strong>JavaScript (ES6):</strong> Manipulação de DOM, cálculos de médias, interatividade e motor SQL simulação.</li>
+                    <li><strong>SQL (Database):</strong> Scripts padronizados em ANSI SQL compatíveis com <code>SQLite</code>, <code>MySQL</code> e <code>PostgreSQL</code>.</li>
+                </ul>
+
+                <h3 style="margin-top: 24px; margin-bottom: 12px;">🚀 Como Hospedar Grátis</h3>
+                <p style="color: var(--text-muted); line-height: 1.6;">Você pode subir este site gratuitamente em plataformas como <strong>GitHub Pages</strong>, <strong>Netlify</strong> ou <strong>Vercel</strong> sem pagar nada! Para o banco de dados SQL em nuvem gratuita, você pode usar o <strong>Supabase</strong>, <strong>PlanetScale</strong> ou <strong>Render.com</strong> com SQLite.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p><strong>NutriEscolar</strong> • Sistema de Consulta e Avaliação do Cardápio Escolar &copy; 2026</p>
+            <p style="font-size: 0.8rem; margin-top: 4px; color: var(--text-light);">Desenvolvido com HTML, CSS, JavaScript e SQL.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="app.js"></script>
+</body>
+</html>
