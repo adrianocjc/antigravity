@@ -1,9 +1,41 @@
 -- ============================================================
 -- BANCO DE DADOS: CARDÁPIO ESCOLAR E SISTEMA DE AVALIAÇÃO
+-- PORTAL DO ALUNO/SERVIDOR E NECESSIDADES ALIMENTARES
 -- Compatível com: SQLite, MySQL, PostgreSQL
 -- ============================================================
 
--- 1. TABELA DE PRATOS / ALIMENTOS
+-- 1. TABELA DE USUÁRIOS (Alunos, Professores, Servidores, Admin)
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(100) NOT NULL,
+    tipo_usuario VARCHAR(30) NOT NULL DEFAULT 'Aluno', -- 'Aluno', 'Professor', 'Funcionário', 'Responsável', 'Admin'
+    turma_setor VARCHAR(50), -- Ex: '8º Ano A', 'Corpo Docente', 'Secretaria'
+    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. TABELA DE NECESSIDADES E RESTRIÇÕES ALIMENTARES
+CREATE TABLE IF NOT EXISTS necessidades_alimentares (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuario_id INTEGER NOT NULL UNIQUE,
+    intolerancia_lactose BOOLEAN DEFAULT FALSE,
+    restricao_gluten BOOLEAN DEFAULT FALSE,
+    vegetariano BOOLEAN DEFAULT FALSE,
+    vegano BOOLEAN DEFAULT FALSE,
+    diabetes BOOLEAN DEFAULT FALSE,
+    alergia_amendoim BOOLEAN DEFAULT FALSE,
+    alergia_frutos_mar BOOLEAN DEFAULT FALSE,
+    alergia_ovo BOOLEAN DEFAULT FALSE,
+    alergia_corantes BOOLEAN DEFAULT FALSE,
+    outras_alergias TEXT,
+    observacoes_medicas TEXT,
+    contato_emergencia VARCHAR(100),
+    atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+-- 3. TABELA DE PRATOS / ALIMENTOS
 CREATE TABLE IF NOT EXISTS pratos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -17,7 +49,7 @@ CREATE TABLE IF NOT EXISTS pratos (
     imagem_url TEXT
 );
 
--- 2. TABELA DE CARDÁPIO DIÁRIO / SEMANAL
+-- 4. TABELA DE CARDÁPIO DIÁRIO / SEMANAL
 CREATE TABLE IF NOT EXISTS cardapio_semanal (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     dia_semana VARCHAR(20) NOT NULL, -- 'Segunda-feira', 'Terça-feira', etc.
@@ -35,21 +67,21 @@ CREATE TABLE IF NOT EXISTS cardapio_semanal (
     FOREIGN KEY (bebida_id) REFERENCES pratos(id)
 );
 
--- 3. TABELA DE AVALIAÇÕES E FEEDBACKS
+-- 5. TABELA DE AVALIAÇÕES E FEEDBACKS
 CREATE TABLE IF NOT EXISTS avaliacoes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     cardapio_id INT NOT NULL,
-    prato_id INT, -- Pode ser específico de um prato ou do cardapio geral
-    nota INT CHECK(nota BETWEEN 1 AND 5), -- 1 a 5 Estrelas
-    categoria_feedback VARCHAR(50), -- 'Sabor', 'Temperatura', 'Apresentação', 'Tamanho da Porção'
+    prato_id INT,
+    nota INT CHECK(nota BETWEEN 1 AND 5),
+    categoria_feedback VARCHAR(50),
     comentario TEXT,
-    tipo_usuario VARCHAR(30) DEFAULT 'Aluno', -- 'Aluno', 'Professor', 'Funcionário', 'Responsável'
-    serie_turma VARCHAR(30), -- Ex: '8º Ano B', '1º Ensino Médio'
+    tipo_usuario VARCHAR(30) DEFAULT 'Aluno',
+    serie_turma VARCHAR(30),
     data_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (cardapio_id) REFERENCES cardapio_semanal(id)
 );
 
--- 4. TABELA DE SUGESTÕES DA COMUNIDADE ESCOLAR
+-- 6. TABELA DE SUGESTÕES DA COMUNIDADE ESCOLAR
 CREATE TABLE IF NOT EXISTS sugestoes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_usuario VARCHAR(100) DEFAULT 'Anônimo',
@@ -61,6 +93,21 @@ CREATE TABLE IF NOT EXISTS sugestoes (
 -- ============================================================
 -- DADOS INICIAIS DE EXEMPLO (SEED DATA)
 -- ============================================================
+
+-- Inserindo Usuários de Teste (Senhas em texto simples para fins demonstrativos escolares)
+INSERT INTO usuarios (id, nome, email, senha, tipo_usuario, turma_setor) VALUES
+(1, 'Lucas Silva', 'aluno@escola.edu', '123456', 'Aluno', '8º Ano A'),
+(2, 'Mariana Oliveira', 'mariana@escola.edu', '123456', 'Aluno', '9º Ano B'),
+(3, 'Profª Ana Costa', 'professor@escola.edu', '123456', 'Professor', 'Corpo Docente - Biologia'),
+(4, 'Roberto Santos', 'roberto@escola.edu', '123456', 'Funcionário', 'Secretaria Escolar'),
+(5, 'Coordenadora Maria', 'admin@escola.edu', 'admin123', 'Admin', 'Gestão & Coordenação');
+
+-- Inserindo Necessidades Alimentares dos Usuários
+INSERT INTO necessidades_alimentares (usuario_id, intolerancia_lactose, restricao_gluten, vegetariano, vegano, diabetes, alergia_amendoim, alergia_frutos_mar, alergia_ovo, alergia_corantes, outras_alergias, observacoes_medicas, contato_emergencia) VALUES
+(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Nenhuma', 'Intolerância moderada a lactose. Evitar leite puro e queijos amarronzados.', 'Mãe: (84) 99888-1122'),
+(2, 0, 1, 1, 0, 0, 1, 0, 0, 0, 'Alergia grave a Amendoim', 'Diagnóstico de Doença Celíaca. Atenção total à contaminação cruzada de glúten e amendoim.', 'Pai: (84) 98777-3344'),
+(3, 0, 0, 0, 1, 1, 0, 0, 0, 0, 'Nenhuma', 'Dieta estritamente vegana e controle de glicemia (Diabetes Tipo 2).', 'Esposo: (84) 99111-5566'),
+(4, 1, 0, 0, 0, 0, 0, 1, 1, 0, 'Camarão e frutos do mar', 'Reação alérgica moderada a frutos do mar e ovo.', 'Esposa: (84) 98822-7788');
 
 -- Inserindo Pratos
 INSERT INTO pratos (id, nome, categoria, descricao, calorias, proteinas_g, contem_gluten, contem_lactose, eh_vegetariano, imagem_url) VALUES
@@ -91,20 +138,3 @@ INSERT INTO avaliacoes (cardapio_id, prato_id, nota, categoria_feedback, comenta
 (2, 6, 5, 'Apresentação', 'Adorei a salada com manga, muito refrescante!', 'Funcionário', 'Secretaria', '2026-09-22 13:00:00'),
 (3, 3, 5, 'Sabor', 'Excelente opção vegetariana, a feijoada estava incrível!', 'Aluno', '3º Ensino Médio', '2026-09-23 12:20:00'),
 (4, 2, 4, 'Tamanho da Porção', 'Comida muito boa, porção generosa.', 'Aluno', '6º Ano B', '2026-09-24 12:10:00');
-
--- ============================================================
--- EXEMPLOS DE CONSULTAS ÚTEIS (QUERIES SQL PARA RELATÓRIOS)
--- ============================================================
-
--- 1. Consultar a média de notas por dia da semana
--- SELECT c.dia_semana, ROUND(AVG(a.nota), 2) AS media_satisfacao, COUNT(a.id) AS total_avaliacoes
--- FROM avaliacoes a
--- JOIN cardapio_semanal c ON a.cardapio_id = c.id
--- GROUP BY c.dia_semana;
-
--- 2. Consultar os pratos mais bem avaliados
--- SELECT p.nome, p.categoria, ROUND(AVG(a.nota), 2) AS media_nota
--- FROM avaliacoes a
--- JOIN pratos p ON a.prato_id = p.id
--- GROUP BY p.id
--- ORDER BY media_nota DESC;

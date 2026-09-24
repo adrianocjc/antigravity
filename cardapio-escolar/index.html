@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriEscolar EENF • Consulta e Avaliação do Cardápio Escolar</title>
-    <meta name="description" content="Sistema completo para consulta diária e avaliação do cardápio escolar com estatísticas e banco de dados SQL.">
+    <title>NutriEscolar EENF • Consulta, Avaliação e Portal do Aluno/Servidor</title>
+    <meta name="description" content="Sistema completo para consulta diária do cardápio escolar, avaliação nutricional, portal privado para cadastro de necessidades alimentares e painel de gestão para coordenação.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
                 <div class="brand-icon">🥗</div>
                 <div class="brand-text">
                     <h1>NutriEscolar - E.E. Nísia Floresta</h1>
-                    <span>Cardápio & Avaliação</span>
+                    <span>Cardápio & Necessidades Alimentares</span>
                 </div>
             </a>
 
@@ -24,11 +24,17 @@
                 <ul class="nav-menu">
                     <li><button class="nav-link active" data-view="view-cardapio">📅 Cardápio</button></li>
                     <li><button class="nav-link" data-view="view-avaliar">⭐ Avaliar</button></li>
+                    <li><button class="nav-link" data-view="view-portal-usuario" id="navPortalBtn">🔐 Portal do Usuário</button></li>
+                    <li><button class="nav-link" data-view="view-admin-gestao" id="navAdminBtn">🛡️ Gestão (Admin)</button></li>
                     <li><button class="nav-link" data-view="view-estatisticas">📊 Estatísticas</button></li>
                     <li><button class="nav-link" data-view="view-sql">💾 Console SQL</button></li>
                     <li><button class="nav-link" data-view="view-sobre">ℹ️ Sobre</button></li>
                 </ul>
             </nav>
+
+            <div class="user-nav-status" id="userNavStatus">
+                <!-- Inserido dinamicamente via JS (Botão de Usuário / Logout) -->
+            </div>
 
             <button class="theme-toggle" id="themeToggle" title="Alternar Modo Escuro/Claro">🌙</button>
         </div>
@@ -40,15 +46,15 @@
         <!-- HERO BANNER -->
         <section class="hero-banner">
             <div class="hero-content">
-                <span class="hero-badge">✨ Alimentação Escolar Saudável</span>
-                <h2>Consulte o Cardápio & Dê Sua Opinião!</h2>
-                <p>Acompanhe diariamente as refeições servidas na escola, veja informações nutricionais e ajude nossa equipe a melhorar a merenda escolar através de avaliações em tempo real.</p>
+                <span class="hero-badge">✨ Alimentação Escolar Inclusiva & Saudável</span>
+                <h2>Cardápio Escolar & Necessidades Alimentares</h2>
+                <p>Consulte as refeições do dia, registre suas restrições e alergias alimentares de forma privada e ajude a coordenação e nutrição a preparar merendas sob medida.</p>
                 <div class="hero-actions">
-                    <button class="btn btn-accent" onclick="document.querySelector('[data-view=\'view-avaliar\']').click()">
-                        ⭐ Avaliar Refeição de Hoje
+                    <button class="btn btn-accent" onclick="document.querySelector('[data-view=\'view-portal-usuario\']').click()">
+                        🔐 Acessar Meu Perfil / Restrições
                     </button>
-                    <button class="btn btn-outline-white" onclick="document.querySelector('[data-view=\'view-sql\']').click()">
-                        💾 Ver Banco de Dados SQL
+                    <button class="btn btn-outline-white" onclick="document.querySelector('[data-view=\'view-admin-gestao\']').click()">
+                        🛡️ Painel da Coordenação (Admin)
                     </button>
                 </div>
             </div>
@@ -133,7 +139,370 @@
             </div>
         </section>
 
-        <!-- ABA 3: ESTATÍSTICAS E RELATÓRIOS -->
+        <!-- ABA 3: PORTAL DO ALUNO / SERVIDOR (LOGIN & NECESSIDADES ALIMENTARES) -->
+        <section id="view-portal-usuario" class="view-section">
+            
+            <!-- ESTADO 1: USUÁRIO NÃO LOGADO (LOGIN / CADASTRO) -->
+            <div id="authContainer" class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-tabs">
+                        <button class="auth-tab-btn active" id="btnShowLogin">🔑 Já Tenho Conta (Login)</button>
+                        <button class="auth-tab-btn" id="btnShowRegister">📝 Criar Nova Conta</button>
+                    </div>
+
+                    <!-- FORMULÁRIO DE LOGIN -->
+                    <form id="loginForm" class="auth-form active">
+                        <h3 style="margin-bottom: 6px;">Bem-vindo(a) de Volta!</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Entre com seu e-mail e senha para gerenciar suas necessidades alimentares.</p>
+
+                        <div class="form-group">
+                            <label for="loginEmail">E-mail Cadastrado:</label>
+                            <input type="email" id="loginEmail" class="form-control" placeholder="seu.email@escola.edu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginSenha">Senha de Acesso:</label>
+                            <input type="password" id="loginSenha" class="form-control" placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">
+                            🚀 Entrar no Portal
+                        </button>
+                    </form>
+
+                    <!-- FORMULÁRIO DE REGISTRO / CADASTRO -->
+                    <form id="registerForm" class="auth-form">
+                        <h3 style="margin-bottom: 6px;">Criar Conta de Aluno ou Servidor</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Cadastre-se para informar à escola suas restrições e intolerâncias alimentares.</p>
+
+                        <div class="form-group">
+                            <label for="regNome">Nome Completo:</label>
+                            <input type="text" id="regNome" class="form-control" placeholder="Ex: Lucas Gabriel Silva" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regEmail">E-mail de Contato:</label>
+                            <input type="email" id="regEmail" class="form-control" placeholder="seu.email@escola.edu" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div class="form-group">
+                                <label for="regTipo">Você é:</label>
+                                <select id="regTipo" class="form-control" required>
+                                    <option value="Aluno">Aluno(a)</option>
+                                    <option value="Professor">Professor(a)</option>
+                                    <option value="Funcionário">Funcionário(a)</option>
+                                    <option value="Responsável">Pai / Responsável</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="regTurma">Turma ou Setor:</label>
+                                <input type="text" id="regTurma" class="form-control" placeholder="Ex: 8º Ano A ou Sala dos Profs" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regSenha">Crie uma Senha:</label>
+                            <input type="password" id="regSenha" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">
+                            ✨ Concluir Cadastro
+                        </button>
+                    </form>
+
+                    <!-- ATALHOS DE TESTE RÁPIDO PARA DEMONSTRAÇÃO -->
+                    <div class="quick-demo-box">
+                        <div class="quick-demo-title">⚡ Acesso Rápido para Demonstração (Testar sem digitar):</div>
+                        <div class="quick-demo-btns">
+                            <button type="button" class="btn-demo" onclick="quickLogin('aluno@escola.edu', '123456')">
+                                👦 Aluno (Lucas - Lactose)
+                            </button>
+                            <button type="button" class="btn-demo" onclick="quickLogin('mariana@escola.edu', '123456')">
+                                👧 Aluna (Mariana - Celíaca/Amendoim)
+                            </button>
+                            <button type="button" class="btn-demo" onclick="quickLogin('professor@escola.edu', '123456')">
+                                👩‍🏫 Professora (Ana - Vegana/Diabetes)
+                            </button>
+                            <button type="button" class="btn-demo" onclick="quickLogin('admin@escola.edu', 'admin123')">
+                                🛡️ Coordenação / Gestão (Admin)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESTADO 2: USUÁRIO LOGADO (GERENCIADOR DE NECESSIDADES ALIMENTARES) -->
+            <div id="userProfileContainer" class="user-profile-container" style="display: none;">
+                <div class="profile-header-card">
+                    <div class="profile-user-avatar" id="profAvatar">👤</div>
+                    <div class="profile-user-info">
+                        <h2 id="profNome">Nome do Usuário</h2>
+                        <div class="profile-badges">
+                            <span class="user-type-badge" id="profTipoBadge">Aluno</span>
+                            <span class="user-turma-badge" id="profTurmaBadge">8º Ano A</span>
+                            <span class="user-email-text" id="profEmail">usuario@escola.edu</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" onclick="logoutUser()">
+                        🚪 Sair da Conta
+                    </button>
+                </div>
+
+                <div class="dietary-needs-card">
+                    <div class="privacy-alert-box">
+                        <div class="privacy-alert-icon">🔒</div>
+                        <div>
+                            <strong>Privacidade e Segurança Garantidas:</strong>
+                            <p style="margin: 0; font-size: 0.85rem;">Suas informações alimentares são de acesso exclusivo do seu perfil e da <strong>Gestão/Coordenação Escolar</strong> para adaptação segura das refeições preparadas na cozinha da escola.</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 16px; font-size: 1.3rem;">🍏 Minhas Necessidades & Restrições Alimentares</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">Marque abaixo quais restrições, alergias ou dietas se aplicam a você:</p>
+
+                    <form id="dietaryForm">
+                        <div class="restrictions-grid">
+                            <label class="checkbox-card">
+                                <input type="checkbox" id="chkLactose">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🥛 Intolerância a Lactose</strong>
+                                    <span>Não consome leite animal e derivados lácteos.</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" id="chkGluten">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🌾 Restrição a Glúten / Celíaco</strong>
+                                    <span>Não consome trigo, cevada, centeio ou aveia.</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" id="chkVeg">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🌱 Dieta Vegetariana</strong>
+                                    <span>Não consome carne bovina, suína, frango ou peixe.</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" id="chkVegan">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🌿 Dieta Estritamente Vegana</strong>
+                                    <span>Não consome nenhum alimento de origem animal (ovo, mel, leite, carne).</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" id="chkDiabetes">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🍬 Diabetes / Restrição de Açúcar</strong>
+                                    <span>Requer controle rígido de açúcar refinado e doces.</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card danger-card">
+                                <input type="checkbox" id="chkAmendoim">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🥜 Alergia a Amendoim / Castanhas</strong>
+                                    <span class="warning-text">⚠️ Risco de anafilaxia ou reação alérgica grave!</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card danger-card">
+                                <input type="checkbox" id="chkFrutosMar">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🦐 Alergia a Frutos do Mar / Peixe</strong>
+                                    <span class="warning-text">⚠️ Risco de reação alérgica a camarão/peixes.</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" id="chkOvo">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🥚 Alergia a Ovo</strong>
+                                    <span>Alergia à proteína do ovo ou derivados.</span>
+                                </div>
+                            </label>
+
+                            <label class="checkbox-card">
+                                <input type="checkbox" id="chkCorantes">
+                                <span class="chk-custom"></span>
+                                <div class="chk-label">
+                                    <strong>🩸 Alergia a Corantes / Conservantes</strong>
+                                    <span>Sensibilidade a aditivos e corantes artificiais.</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div style="margin-top: 24px;" class="form-group">
+                            <label for="txtOutrasAlergias">Outras Alergias ou Alimentos a Evitar:</label>
+                            <input type="text" id="txtOutrasAlergias" class="form-control" placeholder="Ex: Alergia a morango, gergelim, pimentão...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtObsMedicas">Observações Médicas ou Recomendações Especiais:</label>
+                            <textarea id="txtObsMedicas" class="form-control" rows="3" placeholder="Descreva diagnósticos, recomendações do médico/nutricionista ou orientações para a cozinha..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtContatoEmergencia">Contato de Emergência (Telefone / Responsável):</label>
+                            <input type="text" id="txtContatoEmergencia" class="form-control" placeholder="Ex: Mãe (Ana Maria) - (84) 99999-8888">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem;">
+                            💾 Salvar Minhas Necessidades Alimentares
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABA 4: PAINEL DA GESTÃO E COORDENAÇÃO (ADMINISTRADOR) -->
+        <section id="view-admin-gestao" class="view-section">
+            
+            <!-- SE NÃO FOR ADMIN LOGADO: SOLICITAR SENHA DE GESTÃO -->
+            <div id="adminAuthPrompt" class="eval-card" style="max-width: 500px; text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 12px;">🛡️</div>
+                <h2 style="margin-bottom: 8px;">Acesso Restrito da Gestão Escolar</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Esta área é exclusiva para a Coordenação, Direção e Nutricionistas da escola realizarem o acompanhamento dos alunos.</p>
+
+                <form id="adminLoginForm">
+                    <div class="form-group" style="text-align: left;">
+                        <label for="adminPassInput">Senha de Administrador / Coordenação:</label>
+                        <input type="password" id="adminPassInput" class="form-control" placeholder="Digite a senha de admin" required>
+                        <span style="font-size: 0.8rem; color: var(--text-light); margin-top: 4px; display: block;">💡 Dica de demonstração: a senha master é <code>admin123</code></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">
+                        🔓 Entrar no Painel da Coordenação
+                    </button>
+                </form>
+
+                <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px;">
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Ou entre com a conta oficial: <code>admin@escola.edu</code> / <code>admin123</code></p>
+                    <button class="btn btn-secondary btn-sm" onclick="quickLogin('admin@escola.edu', 'admin123')" style="margin-top: 8px;">
+                        ⚡ Entrar Automaticamente como Gestão
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAINEL ADMIN COMPLETO (VISÍVEL APÓS AUTENTICAÇÃO GESTÃO) -->
+            <div id="adminDashboardContainer" style="display: none;">
+                <div class="admin-header-bar">
+                    <div>
+                        <h2>🛡️ Painel de Gestão: Relatório de Necessidades Alimentares</h2>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Controle central de alergias, intolerâncias e restrições dos alunos e servidores da escola.</p>
+                    </div>
+
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" onclick="window.print()">
+                            🖨️ Imprimir Relatório da Cozinha
+                        </button>
+                        <button class="btn btn-secondary" onclick="logoutAdmin()">
+                            🔒 Sair do Modo Admin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARDS DE MÉTRICAS DA GESTÃO -->
+                <div class="stats-grid" style="margin-bottom: 24px;">
+                    <div class="stat-card">
+                        <div class="stat-icon green">👥</div>
+                        <div class="stat-info">
+                            <h4>Total de Cadastrados</h4>
+                            <div class="value" id="adminStatTotalUsers">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon amber">⚠️</div>
+                        <div class="stat-info">
+                            <h4>Com Restrições Registradas</h4>
+                            <div class="value" id="adminStatTotalRestrictions">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">🥛</div>
+                        <div class="stat-info">
+                            <h4>Intolerantes a Lactose / Glúten</h4>
+                            <div class="value" id="adminStatLactoseGluten">0 / 0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">🌱</div>
+                        <div class="stat-info">
+                            <h4>Vegetarianos / Veganos</h4>
+                            <div class="value" id="adminStatVeg">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FILTROS DE BUSCA E TIPO -->
+                <div class="admin-filter-bar">
+                    <div class="filter-group flex-2">
+                        <label for="adminSearchInput">🔍 Buscar por Nome, E-mail ou Observação:</label>
+                        <input type="text" id="adminSearchInput" class="form-control" placeholder="Digite para filtrar instantaneamente...">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="adminFilterUserType">Perfil de Usuário:</label>
+                        <select id="adminFilterUserType" class="form-control">
+                            <option value="Todos">Todos os Perfis</option>
+                            <option value="Aluno">Alunos</option>
+                            <option value="Professor">Professores</option>
+                            <option value="Funcionário">Funcionários</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="adminFilterRestriction">Restrição Específica:</label>
+                        <select id="adminFilterRestriction" class="form-control">
+                            <option value="Todas">Todas as Restrições</option>
+                            <option value="lactose">🥛 Intolerância a Lactose</option>
+                            <option value="gluten">🌾 Restrição a Glúten</option>
+                            <option value="amendoim">🥜 Alergia a Amendoim</option>
+                            <option value="frutos_mar">🦐 Alergia a Frutos do Mar</option>
+                            <option value="veg">🌱 Vegetariano / Vegano</option>
+                            <option value="diabetes">🍬 Diabetes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- TABELA DE RELATÓRIO GERAL -->
+                <div class="admin-table-wrapper">
+                    <table class="data-table admin-table" id="adminTable">
+                        <thead>
+                            <tr>
+                                <th>Usuário / Nome</th>
+                                <th>Tipo / Turma</th>
+                                <th>Necessidades & Restrições Identificadas</th>
+                                <th>Observações Médicas & Emergência</th>
+                                <th class="no-print">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <!-- Inserido dinamicamente via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABA 5: ESTATÍSTICAS E RELATÓRIOS -->
         <section id="view-estatisticas" class="view-section">
             <h2 class="section-title" style="margin-bottom: 24px;">📊 Relatório de Satisfação da Merenda</h2>
 
@@ -169,26 +538,27 @@
             </div>
         </section>
 
-        <!-- ABA 4: CONSOLE E ESTRUTURA SQL -->
+        <!-- ABA 6: CONSOLE E ESTRUTURA SQL -->
         <section id="view-sql" class="view-section">
             <div class="sql-container">
                 <div class="sql-header">
                     <div>
                         <h3 style="margin-bottom: 4px;">💾 Terminal & Banco de Dados SQL</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-muted);">Execute comandos SQL reais e teste consultas na tabela do sistema escolar.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Execute consultas SQL reais nas tabelas de usuários, pratos e necessidades alimentares.</p>
                     </div>
 
                     <select id="sqlPresetSelect" class="preset-queries-dropdown">
                         <option value="">-- Escolher Consulta SQL Pronta --</option>
-                        <option value="all_pratos">Pratos e Calorias (SELECT)</option>
+                        <option value="all_usuarios">Tabela de Usuários (usuarios)</option>
+                        <option value="all_necessidades">Relatório de Restrições (necessidades_alimentares)</option>
+                        <option value="all_pratos">Pratos e Calorias (pratos)</option>
                         <option value="avg_ratings">Média de Notas por Prato (GROUP BY)</option>
                         <option value="all_avaliacoes">Todas as Avaliações Registradas</option>
-                        <option value="segunda_menu">Cardápio da Segunda-feira</option>
                     </select>
                 </div>
 
                 <div class="sql-editor-box">
-                    <textarea id="sqlQueryInput" class="sql-textarea" spellcheck="false">SELECT id, nome, categoria, calorias, proteinas FROM pratos ORDER BY calorias DESC;</textarea>
+                    <textarea id="sqlQueryInput" class="sql-textarea" spellcheck="false">SELECT u.nome, u.tipo_usuario, u.turma_setor, n.intolerancia_lactose, n.restricao_gluten, n.observacoes_medicas FROM usuarios u JOIN necessidades_alimentares n ON u.id = n.usuario_id;</textarea>
                     
                     <div class="sql-controls">
                         <button class="btn btn-primary" id="btnRunSql">⚡ Executar Query SQL</button>
@@ -205,47 +575,48 @@
                 <h3>📄 Schema SQL Completo do Sistema (DDL)</h3>
                 <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Você pode copiar o código abaixo e rodar em qualquer banco SQL como SQLite, MySQL ou PostgreSQL:</p>
                 <pre style="background: var(--bg-subtle); padding: 16px; border-radius: var(--radius-md); font-size: 0.85rem; overflow-x: auto; font-family: monospace; color: var(--text-main);">
-CREATE TABLE pratos (
+CREATE TABLE usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome VARCHAR(100) NOT NULL,
-    categoria VARCHAR(50) NOT NULL,
-    descricao TEXT,
-    calorias INT DEFAULT 0,
-    proteinas_g DECIMAL(5,1) DEFAULT 0.0,
-    contem_gluten BOOLEAN DEFAULT FALSE,
-    contem_lactose BOOLEAN DEFAULT FALSE,
-    eh_vegetariano BOOLEAN DEFAULT FALSE
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(100) NOT NULL,
+    tipo_usuario VARCHAR(30) NOT NULL DEFAULT 'Aluno',
+    turma_setor VARCHAR(50)
 );
 
-CREATE TABLE avaliacoes (
+CREATE TABLE necessidades_alimentares (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cardapio_id INT NOT NULL,
-    prato_id INT,
-    nota INT CHECK(nota BETWEEN 1 AND 5),
-    categoria_feedback VARCHAR(50),
-    comentario TEXT,
-    tipo_usuario VARCHAR(30) DEFAULT 'Aluno',
-    data_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP
+    usuario_id INTEGER NOT NULL UNIQUE,
+    intolerancia_lactose BOOLEAN DEFAULT FALSE,
+    restricao_gluten BOOLEAN DEFAULT FALSE,
+    vegetariano BOOLEAN DEFAULT FALSE,
+    vegano BOOLEAN DEFAULT FALSE,
+    diabetes BOOLEAN DEFAULT FALSE,
+    alergia_amendoim BOOLEAN DEFAULT FALSE,
+    alergia_frutos_mar BOOLEAN DEFAULT FALSE,
+    alergia_ovo BOOLEAN DEFAULT FALSE,
+    alergia_corantes BOOLEAN DEFAULT FALSE,
+    outras_alergias TEXT,
+    observacoes_medicas TEXT,
+    contato_emergencia VARCHAR(100),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );</pre>
             </div>
         </section>
 
-        <!-- ABA 5: SOBRE -->
+        <!-- ABA 7: SOBRE -->
         <section id="view-sobre" class="view-section">
             <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px;">
                 <h2 class="section-title" style="margin-bottom: 16px;">ℹ️ Sobre o Projeto NutriEscolar</h2>
-                <p style="margin-bottom: 16px;">Este site foi desenvolvido com as tecnologias web mais simples e eficientes para solucionar um desafio comum nas escolas: a <strong>transparência do cardápio escolar</strong> e o <strong>engajamento dos estudantes na avaliação nutricional</strong>.</p>
+                <p style="margin-bottom: 16px;">Este site foi desenvolvido para solucionar a transparência do cardápio escolar, permitir a avaliação dos estudantes e garantir um **portal privado para cadastro de necessidades alimentares**, assegurando o acompanhamento pela **Gestão e Coordenação Escolar**.</p>
                 
-                <h3 style="margin-top: 24px; margin-bottom: 12px;">🛠️ Tecnologias Utilizadas (100% Gratuitas)</h3>
+                <h3 style="margin-top: 24px; margin-bottom: 12px;">🛠️ Recursos do Sistema</h3>
                 <ul style="margin-left: 20px; line-height: 1.8; color: var(--text-muted);">
-                    <li><strong>HTML5:</strong> Estrutura semântica e acessível da aplicação.</li>
-                    <li><strong>CSS3:</strong> Estilização moderna com CSS Variables, Flexbox, CSS Grid, e modo escuro/claro automático.</li>
-                    <li><strong>JavaScript (ES6):</strong> Manipulação de DOM, cálculos de médias, interatividade e motor SQL simulação.</li>
-                    <li><strong>SQL (Database):</strong> Scripts padronizados em ANSI SQL compatíveis com <code>SQLite</code>, <code>MySQL</code> e <code>PostgreSQL</code>.</li>
+                    <li><strong>Portal do Usuário:</strong> Login e senha individuais para Alunos, Professores e Servidores informarem suas alergias e dietas.</li>
+                    <li><strong>Painel da Gestão (Admin):</strong> Visão administrativa completa para a coordenação e equipe da cozinha consultarem fichas de saúde alimentar.</li>
+                    <li><strong>Consulta de Cardápio:</strong> Cardápio diário com selos de vegetariano, sem glúten e sem lactose.</li>
+                    <li><strong>Avaliação & Estatísticas:</strong> Média de satisfação dos pratos servidos.</li>
                 </ul>
-
-                <h3 style="margin-top: 24px; margin-bottom: 12px;">🚀 Como Hospedar Grátis</h3>
-                <p style="color: var(--text-muted); line-height: 1.6;">Você pode subir este site gratuitamente em plataformas como <strong>GitHub Pages</strong>, <strong>Netlify</strong> ou <strong>Vercel</strong> sem pagar nada! Para o banco de dados SQL em nuvem gratuita, você pode usar o <strong>Supabase</strong>, <strong>PlanetScale</strong> ou <strong>Render.com</strong> com SQLite.</p>
             </div>
         </section>
 
@@ -254,10 +625,26 @@ CREATE TABLE avaliacoes (
     <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p><strong>NutriEscolar</strong> • Sistema de Consulta e Avaliação do Cardápio Escolar &copy; 2026</p>
-            <p style="font-size: 0.8rem; margin-top: 4px; color: var(--text-light);">Desenvolvido com HTML, CSS, JavaScript e SQL.</p>
+            <p><strong>NutriEscolar</strong> • Sistema de Consulta do Cardápio & Gestão de Necessidades Alimentares &copy; 2026</p>
+            <p style="font-size: 0.8rem; margin-top: 4px; color: var(--text-light);">Desenvolvido para Escolas Públicas e Privadas • HTML, CSS, JavaScript e SQL.</p>
         </div>
     </footer>
+
+    <!-- MODAL DE DETALHES DO ESTUDANTE (ADMIN) -->
+    <div class="modal-backdrop" id="adminUserModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalUserNome">Ficha Alimentar do Usuário</h3>
+                <button class="modal-close-btn" onclick="closeAdminUserModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalUserBody">
+                <!-- Conteúdo dinâmico -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeAdminUserModal()">Fechar Ficha</button>
+            </div>
+        </div>
+    </div>
 
     <!-- SCRIPTS -->
     <script src="app.js"></script>
